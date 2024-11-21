@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos</title>
+    <link rel="stylesheet" href="../proyectomio/img">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .btn_cursos {
+            display: flex;
+            flex-wrap:wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn_cursos button {
+            background-color: #144B76;
+            color: #ffffff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn_cursos button img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .btn_cursos button:hover {
+            background-color: #144B76;
+        }
+
+        .btn_cursos button.selected {
+            background-color:  #FB8828;
+        }
+
+        .tarjeta {
+            background-color: #fdfdfd;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            
+            align-items: center;
+            gap: 15px;
+        }
+
+        .tarjeta img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 30%;
+        }
+
+        .tarjeta div {
+            flex-grow: 1;
+        }
+
+        .tarjeta h3 {
+            margin: 0;
+            font-size: 1.2em;
+           
+            width: auto;
+        }
+
+        .tarjeta p {
+            margin: 5px 0;
+            color: #757474;
+        }
+        .tarjeta button {
+            background-color: #FB8828;
+            color: #ffffff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .tarjeta button:hover {
+            background-color: #E2781A;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <div class="container">
+        <h1>Cursos Disponibles - CFL N°404 Lomas de Zamora</h1>
+        <div class="btn_cursos">
+            <!-- Los botones se generarán aquí dinámicamente -->
+        </div>
+
+        <h2>Cursos Disponibles</h2>
+        <div id="tarjetas">
+            <!-- Tarjetas de cursos se generarán aquí dinámicamente -->
+             
+        </div>
+    </div>
+
+    <script>
+        const cursos = [
+            {
+                titulo: "Auxiliar Contable",
+                horario: "Lunes y Miércoles de 9 a 11:30 hs.",
+                duracion: "Anual",
+                inicio: "Marzo 2025",
+                img: "../proyectomio/img/auxiliarcontable.png"
+               
+            },
+            {
+                titulo: "Administrativo Primer Horario",
+                horario: "Lunes y Miércoles de 15:30 a 18:00 hs.",
+                duracion: "Anual",
+                inicio: "Marzo 2025",
+                img: "../proyectomio/img/administrativo.png"
+            },
+            {
+                titulo: "Administrativo Segundo Horario",
+                horario: "Miércoles y Viernes de 19:30 a 22:00 hs.",
+                duracion: "Anual",
+                inicio: "Marzo 2025",
+                img: "../proyectomio/img/administrativo1.png"
+            },
+            {
+                titulo: "Liquidador de sueldos",
+                horario: "Lunes y Miércoles de 12:00 a 15:00 hs.",
+                duracion: "Anual",
+                inicio: "Marzo 2025",
+                img: "../proyectomio/img/liquidadordesueldos.png"
+            },
+            {
+                titulo: "Operador de informática para la administración y gestión",
+                horario: "Martes y Jueves de 9:00 a 12:00 hs.",
+                duracion: "Anual",
+                inicio: "Marzo 2025",
+                img: "../proyectomio/img/operador.png"
+            },
+            {
+                titulo: "Operador de informática para la administración y gestión",
+                horario: "Martes y Jueves de 13:00 a 16:00 hs.",
+                duracion: "Anual",
+                inicio: "Marzo 2025",
+                img: "../proyectomio/img/operadortarde.png"
+            },
+            {
+                titulo: "Programación Python",
+                horario: "Martes y Jueves de 12:50 a 16:20 hs.",
+                duracion: "Anual",
+                inicio: "Marzo 2025",
+                img: "../proyectomio/img/programacionpython.png"
+            },
+            {
+                titulo: "Diseño de Páginas Web",
+                horario: "Lunes y Miércoles de 13 a 17 hs.",
+                duracion: "Anual",
+                inicio: "Marzo 2025",
+                img: "../proyectomio/img/diseñoweb.png"
+
+            },
+            {
+                titulo: "Capacitación en Inteligencia Artificial",
+                horario: "Martes y Jueves de 16:30 a 19:10 hs.",
+                duracion: "Cuatrimestral",
+                inicio: "Marzo 2025 / Agosto 2025",
+                img: "../proyectomio/img/ia.png"
+            },
+            {
+                titulo: "Liquidación de impuestos",
+                horario: "Lunes y Miércoles de 18:30 a 21:30 hs.",
+                duracion: "Bimestral",
+                inicio: "Marzo / Mayo / Agosto / Octubre 2025",
+                img: "../proyectomio/img/liquidacionimpuestos.png"
+            }
+        ];
+
+        const btnContainer = document.querySelector(".btn_cursos");
+        const tarjetasContainer = document.getElementById("tarjetas");
+
+        cursos.forEach((curso) => {
+            // Botón
+            const button = document.createElement("button");
+            button.innerHTML = `<img src="${curso.img}" alt="${curso.titulo}"> ${curso.titulo}`;
+            button.dataset.horario = curso.horario;
+            button.dataset.duracion = curso.duracion;
+            button.dataset.inicio = curso.inicio;
+
+            button.addEventListener("click", () => {
+                // Quitar la selección de otros botones
+                document.querySelectorAll(".btn_cursos button").forEach(btn => btn.classList.remove("selected"));
+                // Agregar la clase seleccionada al botón actual
+                button.classList.add("selected");
+
+                // Mostrar la información del curso
+                alert(`Curso: ${curso.titulo}\nHorario: ${curso.horario}\nDuración: ${curso.duracion}\nInicio: ${curso.inicio}`);
+            });
+
+            btnContainer.appendChild(button);
+
+            // Tarjeta
+            const tarjeta = document.createElement("div");
+            tarjeta.className = "tarjeta";
+            tarjeta.innerHTML = `
+                <img src="${curso.img}" alt="${curso.titulo}">
+                <div>
+                    <h3>${curso.titulo}</h3>
+                    <p>${curso.horario}</p>
+                    <p>Duración: ${curso.duracion}</p>
+                    <p>Inicio: ${curso.inicio}</p>
+                </div>
+
+               <a href="${curso.pagina}">
+                    <button>Ver más</button>
+                </a>
+            `;
+
+            tarjetasContainer.appendChild(tarjeta);
+        });
+    </script>
+</body>
+
+</html>
